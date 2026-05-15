@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- saved from url=(0045)file:///C:/Users/dm_cl/Downloads/index_1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AHP PIVC Competency – RBWH</title>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="./index_files/css2" rel="stylesheet">
 <style>
 :root{
   --navy:#0f172a;--navy2:#1e293b;--navy3:#334155;--slate:#475569;
@@ -101,7 +101,7 @@ body{font-family:var(--font);background:linear-gradient(160deg,#0a1628 0%,#0f224
 </style>
 </head>
 <body>
-<div class="wrap" id="root"></div>
+<div class="wrap" id="root"><div class="hdr"><div class="hdr-eye">RBWH · Anaesthetic Health Practitioner</div><div class="hdr-title">PIVC Competency Assessment</div><div class="hdr-sub">Direct Observation of Practice · 2019</div><div class="prog"><div class="prog-meta"><span>Assessment progress</span><span style="color:#4a6fa5;font-weight:700;">0/26 · 0%</span></div><div class="prog-track"><div class="prog-fill" style="width:0%"></div></div></div><div class="tabs"><button class="tab active" data-action="gostep" data-step="0">Details</button><button class="tab" data-action="gostep" data-step="1">Assessment</button><button class="tab" data-action="gostep" data-step="2">Sign</button></div></div><div class="card"><div class="card-title">Candidate &amp; Assessor Details</div><div class="fg2"><div class="f"><label>Candidate Name</label><input type="text" id="inp-name" value="" placeholder="Full name"></div><div class="f"><label>Candidate Email</label><input type="email" id="inp-email" value="" placeholder="candidate@health.qld.gov.au"></div><div class="f"><label>Assessor Name</label><input type="text" id="inp-assessor" value="" placeholder="Full name"></div><div class="f"><label>Assessment Date</label><input type="date" id="inp-date" value="2026-05-15"></div></div><div class="card-title" style="margin-top:4px;">Experience Level</div><div class="exp-g"><button class="exp-btn" data-action="setexp" data-val="novice"><span class="exp-lbl">Novice</span><span class="exp-desc">&lt; 10 cannulations</span></button><button class="exp-btn" data-action="setexp" data-val="intermediate"><span class="exp-lbl">Intermediate</span></button><button class="exp-btn" data-action="setexp" data-val="experienced"><span class="exp-lbl">Experienced</span><span class="exp-desc">&gt; 100 cannulations</span></button></div><div class="card-title">Prerequisite Reading</div><label class="pre-item"><input type="checkbox" data-action="setpre" data-idx="0"><span>Has read the AHP PIVC Workshop/Package</span></label><label class="pre-item"><input type="checkbox" data-action="setpre" data-idx="1"><span>Has read the RBWH Procedure Document - 000259 PIVC and infusion management</span></label><label class="pre-item"><input type="checkbox" data-action="setpre" data-idx="2"><span>Has perused 4014MN_RP - RBWH PIVC Resource Package</span></label><label class="pre-item"><input type="checkbox" data-action="setpre" data-idx="3"><span>Completed Multiple Choice Questions with 100% Correct</span></label></div><button class="btn btn-dk" data-action="gostep" data-step="1">Continue to Assessment →</button></div>
 <div class="toast" id="toast"></div>
 <script>
 "use strict";
@@ -172,11 +172,19 @@ var S = {
 
 // ── URL encode/decode ──────────────────────────────────────────────────────────
 function encodeToURL() {
-  var strip = function(sig) { return sig ? sig.replace('data:image/png;base64,','') : null; };
+  // Deliberately exclude assessor signature — keeps URL short enough for iMessage/SMS
+  // Ratings keys use section index + item index instead of full strings to save space
+  var rCompact = {};
+  SECTIONS.forEach(function(sec, si) {
+    sec.items.forEach(function(item, ii) {
+      var key = sec.title + '::' + item;
+      var val = S.ratings[key];
+      if (val) rCompact[si + ',' + ii] = val;
+    });
+  });
   var p = {
     n:S.name, e:S.email, an:S.assessorName, d:S.date,
-    exp:S.experience, pr:S.prereqs, r:S.ratings, o:S.outcome,
-    as:strip(S.assessorSig)
+    exp:S.experience, pr:S.prereqs, r:rCompact, o:S.outcome
   };
   try {
     var b64 = btoa(unescape(encodeURIComponent(JSON.stringify(p))));
@@ -190,16 +198,26 @@ function decodeFromURL() {
   if (!q) return false;
   try {
     var p = JSON.parse(decodeURIComponent(escape(atob(q))));
-    var expand = function(sig) { return sig ? 'data:image/png;base64,' + sig : null; };
-    S.name        = p.n   || '';
-    S.email       = p.e   || '';
-    S.assessorName= p.an  || '';
-    S.date        = p.d   || S.date;
-    S.experience  = p.exp || '';
-    S.prereqs     = p.pr  || {};
-    S.ratings     = p.r   || {};
-    S.outcome     = p.o   || null;
-    S.assessorSig = expand(p.as);
+    S.name         = p.n   || '';
+    S.email        = p.e   || '';
+    S.assessorName = p.an  || '';
+    S.date         = p.d   || S.date;
+    S.experience   = p.exp || '';
+    S.prereqs      = p.pr  || {};
+    S.outcome      = p.o   || null;
+    S.assessorSig  = null; // not transmitted — keeps URL small
+    // Expand compact ratings back to full keys
+    S.ratings = {};
+    var rCompact = p.r || {};
+    Object.keys(rCompact).forEach(function(k) {
+      var parts = k.split(',');
+      var si = parseInt(parts[0], 10);
+      var ii = parseInt(parts[1], 10);
+      if (SECTIONS[si] && SECTIONS[si].items[ii]) {
+        var fullKey = SECTIONS[si].title + '::' + SECTIONS[si].items[ii];
+        S.ratings[fullKey] = rCompact[k];
+      }
+    });
     S.mode = 'assessee';
     S.step = 3;
     return true;
@@ -681,5 +699,6 @@ document.addEventListener('click', function(e) {
 decodeFromURL();
 render();
 </script>
-</body>
-</html>
+
+
+</body></html>
