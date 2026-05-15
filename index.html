@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0080)file:///C:/Users/dm_cl/Downloads/AHP%20PIVC%20Competency%20%E2%80%93%20RBWH.html -->
+<!-- saved from url=(0045)file:///C:/Users/dm_cl/Downloads/index_1.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -171,23 +171,23 @@ var S = {
 };
 
 // ── URL encode/decode ──────────────────────────────────────────────────────────
+// Compact format: ratings = 26-char string (C/D/S/-), prereqs = 4-char string (1/0)
+// experience = single char (n/i/e), outcome = single char (Y/N/-)
+// No signature transmitted — keeps URL under ~250 chars
 function encodeToURL() {
-  // Deliberately exclude assessor signature — keeps URL short enough for iMessage/SMS
-  // Ratings keys use section index + item index instead of full strings to save space
-  var rCompact = {};
-  SECTIONS.forEach(function(sec, si) {
-    sec.items.forEach(function(item, ii) {
-      var key = sec.title + '::' + item;
-      var val = S.ratings[key];
-      if (val) rCompact[si + ',' + ii] = val;
+  var rStr = '';
+  SECTIONS.forEach(function(sec) {
+    sec.items.forEach(function(item) {
+      var v = S.ratings[sec.title+'::'+item] || '-';
+      rStr += v;
     });
   });
-  var p = {
-    n:S.name, e:S.email, an:S.assessorName, d:S.date,
-    exp:S.experience, pr:S.prereqs, r:rCompact, o:S.outcome
-  };
+  var pStr = PREREQS.map(function(pr){ return S.prereqs[pr] ? '1' : '0'; }).join('');
+  var expChar = S.experience ? S.experience[0] : '-';
+  var oChar   = S.outcome === 'Yes' ? 'Y' : (S.outcome === 'No' ? 'N' : '-');
+  var p = { n:S.name, e:S.email, an:S.assessorName, d:S.date, x:expChar, p:pStr, r:rStr, o:oChar };
   try {
-    var b64 = btoa(unescape(encodeURIComponent(JSON.stringify(p))));
+    var b64  = btoa(unescape(encodeURIComponent(JSON.stringify(p))));
     var base = window.location.href.split('?')[0].split('#')[0];
     return base + '?s=' + b64;
   } catch(e) { return null; }
@@ -198,26 +198,33 @@ function decodeFromURL() {
   if (!q) return false;
   try {
     var p = JSON.parse(decodeURIComponent(escape(atob(q))));
-    S.name         = p.n   || '';
-    S.email        = p.e   || '';
-    S.assessorName = p.an  || '';
-    S.date         = p.d   || S.date;
-    S.experience   = p.exp || '';
-    S.prereqs      = p.pr  || {};
-    S.outcome      = p.o   || null;
-    S.assessorSig  = null; // not transmitted — keeps URL small
-    // Expand compact ratings back to full keys
+    S.name         = p.n  || '';
+    S.email        = p.e  || '';
+    S.assessorName = p.an || '';
+    S.date         = p.d  || S.date;
+    S.assessorSig  = null;
+    // Experience: single char n/i/e
+    var xMap = { n:'novice', i:'intermediate', e:'experienced' };
+    S.experience = xMap[p.x] || '';
+    // Prereqs: 4-char string
+    S.prereqs = {};
+    var pStr = p.p || '';
+    PREREQS.forEach(function(pr, i){ S.prereqs[pr] = pStr[i] === '1'; });
+    // Ratings: 26-char string in section/item order
     S.ratings = {};
-    var rCompact = p.r || {};
-    Object.keys(rCompact).forEach(function(k) {
-      var parts = k.split(',');
-      var si = parseInt(parts[0], 10);
-      var ii = parseInt(parts[1], 10);
-      if (SECTIONS[si] && SECTIONS[si].items[ii]) {
-        var fullKey = SECTIONS[si].title + '::' + SECTIONS[si].items[ii];
-        S.ratings[fullKey] = rCompact[k];
-      }
+    var rStr = p.r || '';
+    var idx  = 0;
+    SECTIONS.forEach(function(sec) {
+      sec.items.forEach(function(item) {
+        var ch = rStr[idx] || '-';
+        if (ch === 'C' || ch === 'D' || ch === 'S') {
+          S.ratings[sec.title+'::'+item] = ch;
+        }
+        idx++;
+      });
     });
+    // Outcome
+    S.outcome = p.o === 'Y' ? 'Yes' : (p.o === 'N' ? 'No' : null);
     S.mode = 'assessee';
     S.step = 3;
     return true;
