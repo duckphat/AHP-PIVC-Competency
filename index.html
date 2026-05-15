@@ -1,1 +1,816 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/dm_cl/Downloads/index_3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHP PIVC Competency – RBWH</title>
+<link href="./index_files/css2" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f172a;--navy2:#1e293b;--navy3:#334155;--slate:#475569;
+  --muted:#64748b;--border:#e2e8f0;--bg:#f8fafc;
+  --green:#16a34a;--amber:#d97706;--red:#dc2626;--blue:#2563eb;
+  --font:'Crimson Pro',Georgia,serif;--mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:linear-gradient(160deg,#0a1628 0%,#0f2240 55%,#0a1628 100%);min-height:100vh;color:var(--navy);padding:20px 14px 60px;}
+.wrap{max-width:680px;margin:0 auto;}
+.hdr{margin-bottom:18px;}
+.hdr-eye{color:#4a6fa5;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;font-family:var(--mono);}
+.hdr-title{color:#fff;font-size:21px;font-weight:700;margin-bottom:2px;}
+.hdr-sub{color:#4a6fa5;font-size:12px;}
+.prog{margin-top:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px 14px;}
+.prog-meta{display:flex;justify-content:space-between;font-size:11px;color:#4a6fa5;margin-bottom:6px;font-family:var(--mono);}
+.prog-track{background:rgba(0,0,0,.35);border-radius:3px;height:5px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#2563eb,#7c3aed);transition:width .4s;}
+.prog-fill.done{background:var(--green);}
+.tabs{display:flex;gap:3px;margin-top:10px;background:rgba(255,255,255,.04);border-radius:9px;padding:4px;border:1px solid rgba(255,255,255,.06);}
+.tab{flex:1;padding:8px 4px;border:none;border-radius:6px;background:transparent;color:#4a6fa5;font-size:12px;cursor:pointer;font-family:var(--font);transition:all .18s;}
+.tab.active{background:#fff;color:var(--navy);font-weight:700;}
+.card{background:#fff;border-radius:12px;padding:22px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.14);}
+.card-title{font-size:14px;font-weight:700;color:var(--navy);border-bottom:1.5px solid var(--border);padding-bottom:8px;margin-bottom:16px;}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.f label{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.f input{width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-size:14px;font-family:var(--font);color:var(--navy);outline:none;transition:border-color .15s;}
+.f input:focus{border-color:var(--blue);}
+.exp-g{display:flex;gap:8px;margin-bottom:16px;}
+.exp-btn{flex:1;padding:10px 6px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--slate);cursor:pointer;font-family:var(--font);text-align:center;transition:all .15s;}
+.exp-btn.sel{border-color:var(--blue);background:#eff6ff;color:#1d4ed8;}
+.exp-lbl{font-weight:700;font-size:13px;display:block;}
+.exp-desc{font-size:10px;margin-top:2px;opacity:.65;display:block;}
+.pre-item{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;margin-bottom:6px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;background:var(--bg);}
+.pre-item.chk{background:#f0fdf4;border-color:#86efac;}
+.pre-item input[type=checkbox]{margin-top:2px;cursor:pointer;accent-color:var(--green);width:15px;height:15px;flex-shrink:0;}
+.pre-item span{font-size:13px;color:var(--navy3);line-height:1.45;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:10px 14px;margin-bottom:12px;}
+.leg-item{display:flex;align-items:center;gap:6px;}
+.leg-chip{padding:2px 8px;border-radius:4px;font-weight:700;font-size:11px;color:#fff;font-family:var(--mono);}
+.crit-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f1f5f9;gap:12px;}
+.crit-row:last-child{border-bottom:none;}
+.crit-text{font-size:13px;color:var(--navy3);line-height:1.45;flex:1;}
+.rat-g{display:flex;gap:4px;flex-shrink:0;}
+.rat-btn{width:36px;height:30px;border:1.5px solid var(--border);border-radius:5px;background:#fff;color:var(--muted);font-weight:700;font-size:12px;cursor:pointer;font-family:var(--mono);transition:all .14s;}
+.rat-btn.sC{background:#16a34a;border-color:#16a34a;color:#fff;}
+.rat-btn.sD{background:#d97706;border-color:#d97706;color:#fff;}
+.rat-btn.sS{background:#dc2626;border-color:#dc2626;color:#fff;}
+.out-g{display:flex;gap:10px;margin-bottom:16px;}
+.out-btn{flex:1;padding:13px;border:1.5px solid var(--border);border-radius:9px;background:var(--bg);cursor:pointer;font-family:var(--font);font-size:14px;font-weight:700;transition:all .15s;}
+.out-btn.sY{background:#f0fdf4;border-color:#16a34a;color:#16a34a;}
+.out-btn.sN{background:#fef2f2;border-color:#dc2626;color:#dc2626;}
+.sig-label{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;display:block;}
+.sig-wrap{position:relative;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);overflow:hidden;margin-bottom:12px;}
+.sig-canvas{width:100%;height:90px;display:block;cursor:crosshair;touch-action:none;}
+.sig-ph{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#94a3b8;font-size:12px;pointer-events:none;font-style:italic;}
+.sig-clear{position:absolute;top:5px;right:8px;background:none;border:none;color:#94a3b8;cursor:pointer;font-size:11px;font-family:var(--font);display:none;}
+.btn{width:100%;padding:13px;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font);transition:opacity .15s;display:block;}
+.btn:disabled{opacity:.35;cursor:not-allowed;}
+.btn-dk{background:var(--navy);color:#fff;}
+.btn-sec{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.1);}
+.btn-grn{background:#16a34a;color:#fff;}
+.btn-blu{background:#2563eb;color:#fff;}
+.btn-amb{background:#d97706;color:#fff;}
+.btn-row{display:flex;gap:8px;}
+.share-box{background:#f0fdf4;border:2px solid #86efac;border-radius:10px;padding:16px;margin-bottom:14px;}
+.share-box h3{font-size:14px;color:#16a34a;margin-bottom:4px;font-weight:700;}
+.share-box p{font-size:12px;color:var(--slate);margin-bottom:10px;line-height:1.5;}
+.share-url{font-family:var(--mono);font-size:9px;word-break:break-all;color:var(--navy3);background:#fff;padding:8px 10px;border-radius:6px;border:1px solid #86efac;margin-bottom:10px;line-height:1.6;max-height:75px;overflow:hidden;}
+.share-acts{display:flex;gap:8px;}
+.share-act-btn{flex:1;padding:9px;border-radius:7px;border:none;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;color:#fff;}
+.assessee-banner{background:linear-gradient(135deg,#1e3a5f,#162a4a);border:1px solid rgba(37,99,235,.4);border-radius:10px;padding:16px 18px;margin-bottom:14px;color:#fff;}
+.assessee-banner h2{font-size:16px;margin-bottom:5px;}
+.assessee-banner p{font-size:12px;color:#93c5fd;line-height:1.5;}
+.rev-section{margin-bottom:10px;}
+.rev-sec-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
+.rev-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f1f5f9;gap:8px;}
+.rev-row:last-child{border-bottom:none;}
+.rev-text{font-size:12px;color:var(--navy3);flex:1;line-height:1.4;}
+.chip{display:inline-block;padding:2px 7px;border-radius:4px;font-weight:700;font-size:11px;color:#fff;font-family:var(--mono);}
+.chip-C{background:#16a34a;}.chip-D{background:#d97706;}.chip-S{background:#dc2626;}.chip-na{background:#94a3b8;}
+.outcome-badge{display:inline-block;padding:9px 18px;border-radius:8px;font-size:15px;font-weight:700;margin-bottom:14px;}
+.outcome-badge.Y{background:#f0fdf4;color:#16a34a;border:2px solid #16a34a;}
+.outcome-badge.N{background:#fef2f2;color:#dc2626;border:2px solid #dc2626;}
+.note{font-size:12px;color:var(--muted);line-height:1.5;padding:10px 12px;background:var(--bg);border-radius:7px;border:1px solid var(--border);margin-bottom:12px;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-family:var(--mono);opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;}
+.toast.show{opacity:1;}
+@media(max-width:480px){
+  .fg2{grid-template-columns:1fr;}
+  .exp-g{flex-direction:column;}
+  .btn-row{flex-direction:column;}
+  .share-acts{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="root"><div class="hdr"><div class="hdr-eye">RBWH · Anaesthetic Health Practitioner</div><div class="hdr-title">PIVC Competency Assessment</div><div class="hdr-sub">Direct Observation of Practice</div><div class="prog"><div class="prog-meta"><span>Assessment progress</span><span style="color:#4a6fa5;font-weight:700;">0/26 · 0%</span></div><div class="prog-track"><div class="prog-fill" style="width:0%"></div></div></div><div class="tabs"><button class="tab active" data-action="gostep" data-step="0">Details</button><button class="tab" data-action="gostep" data-step="1">Assessment</button><button class="tab" data-action="gostep" data-step="2">Sign</button></div></div><div class="card"><div class="card-title">Candidate &amp; Assessor Details</div><div class="fg2"><div class="f"><label>Candidate Name</label><input type="text" id="inp-name" value="" placeholder="Full name"></div><div class="f"><label>Candidate Email</label><div style="display:flex;align-items:center;border:1.5px solid #e2e8f0;border-radius:7px;overflow:hidden;background:#fff;"><input type="text" id="inp-email-user" value="" placeholder="username" style="border:none;outline:none;padding:9px 0 9px 11px;font-size:14px;font-family:var(--font);color:#0f172a;flex:1;min-width:0;background:transparent;"><span style="padding:9px 10px 9px 2px;font-size:13px;color:#64748b;white-space:nowrap;background:transparent;">@health.qld.gov.au</span></div></div><div class="f"><label>Assessor Name</label><input type="text" id="inp-assessor" value="" placeholder="Full name"></div><div class="f"><label>Assessment Date</label><input type="date" id="inp-date" value="2026-05-15"></div></div><div class="card-title" style="margin-top:4px;">Experience Level</div><div class="exp-g"><button class="exp-btn" data-action="setexp" data-val="novice"><span class="exp-lbl">Novice</span><span class="exp-desc">&lt; 10 cannulations</span></button><button class="exp-btn" data-action="setexp" data-val="intermediate"><span class="exp-lbl">Intermediate</span></button><button class="exp-btn" data-action="setexp" data-val="experienced"><span class="exp-lbl">Experienced</span><span class="exp-desc">&gt; 100 cannulations</span></button></div><div class="card-title">Prerequisite Reading</div><label class="pre-item"><input type="checkbox" data-action="setpre" data-idx="0"><span>Has read the AHP PIVC Workshop/Package</span></label><label class="pre-item"><input type="checkbox" data-action="setpre" data-idx="1"><span>Has read the RBWH Procedure Document - 000259 PIVC and infusion management</span></label><label class="pre-item"><input type="checkbox" data-action="setpre" data-idx="2"><span>Has perused 4014MN_RP - RBWH PIVC Resource Package</span></label><label class="pre-item"><input type="checkbox" data-action="setpre" data-idx="3"><span>Completed Multiple Choice Questions with 100% Correct</span></label></div><button class="btn btn-dk" data-action="gostep" data-step="1">Continue to Assessment →</button></div>
+<div class="toast" id="toast"></div>
+<script>
+"use strict";
+
+// ── CONFIG — paste your Apps Script Web App URL here after deployment ──────────
+var SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+// ── Data ───────────────────────────────────────────────────────────────────────
+var DAN = 'Daniel.clarke@health.qld.gov.au';
+var RCOLS = {C:'#16a34a', D:'#d97706', S:'#dc2626'};
+var RLBLS = {C:'Competent', D:'Requires Development', S:'Requires Supervision'};
+var EXP = [
+  {v:'novice',       l:'Novice',       d:'< 10 cannulations'},
+  {v:'intermediate', l:'Intermediate', d:''},
+  {v:'experienced',  l:'Experienced',  d:'> 100 cannulations'}
+];
+var PREREQS = [
+  'Has read the AHP PIVC Workshop/Package',
+  'Has read the RBWH Procedure Document - 000259 PIVC and infusion management',
+  'Has perused 4014MN_RP - RBWH PIVC Resource Package',
+  'Completed Multiple Choice Questions with 100% Correct'
+];
+var SECTIONS = [
+  {title:'Patient Preparation', items:[
+    'Obtains order from supervising anaesthetist for intravenous access',
+    'Confirms identity of patient',
+    'Checks patient allergies - antiseptics, dressings, local anaesthetic',
+    'Informs patient of purpose of IV cannula and obtains verbal consent',
+    'Demonstrates and justifies appropriate site selection',
+    'Demonstrates appropriate gauge selection'
+  ]},
+  {title:'Workspace and Equipment Preparation', items:[
+    'Prepares a general aseptic field - cleaned/disinfected before use',
+    'Checks equipment for integrity and expiry',
+    'Positions patient to prevent contamination and provide access to vein',
+    'Performs correct hand hygiene - ABHR or soap/water',
+    'Wears gloves and eye protection'
+  ]},
+  {title:'Aseptic Non-Touch Technique', items:[
+    'Key Parts protected from contamination during preparation of equipment',
+    'Key Site disinfected with correct antiseptic and allowed to air dry',
+    'Key Site protected from contamination during procedure'
+  ]},
+  {title:'Insertion Technique', items:[
+    'Correct tourniquet application and vein distension techniques',
+    'Assess for difficulty of vein visualization / palpation',
+    'Prepares cannula correctly (spins on introducer and realigns)',
+    'Holds skin / vein taught without contaminating the insertion site',
+    'Inserts cannula at appropriate angle, direction and depth for vein position',
+    'Activates white button to retract stylet while stylet is still in the vein',
+    'Manages sharps safely'
+  ]},
+  {title:'Dressing, Confirmation and Documentation', items:[
+    'Ensures dressing is applied such that insertion site is visible',
+    'Labels dressing with date of insertion',
+    'Checks that cannula is flushing or that fluids are running',
+    'Stops/slows fluid unless Anaesthetist has requested a fluid bolus',
+    'Hands over to Anaesthetist for documentation or completes the yellow sticker'
+  ]}
+];
+var TOTAL = SECTIONS.reduce(function(a,s){ return a + s.items.length; }, 0);
+
+// ── State ──────────────────────────────────────────────────────────────────────
+var S = {
+  mode: 'assessor', step: 0,
+  name: '', email: '', assessorName: '',
+  date: new Date().toISOString().split('T')[0],
+  experience: '', prereqs: {}, ratings: {}, outcome: null,
+  assessorSig: null, assesseeSig: null
+};
+
+// ── URL encode/decode ──────────────────────────────────────────────────────────
+// Compact format: ratings = 26-char string (C/D/S/-), prereqs = 4-char string (1/0)
+// experience = single char (n/i/e), outcome = single char (Y/N/-)
+// No signature transmitted — keeps URL under ~250 chars
+function encodeToURL() {
+  var rStr = '';
+  SECTIONS.forEach(function(sec) {
+    sec.items.forEach(function(item) {
+      var v = S.ratings[sec.title+'::'+item] || '-';
+      rStr += v;
+    });
+  });
+  var pStr = PREREQS.map(function(pr){ return S.prereqs[pr] ? '1' : '0'; }).join('');
+  var expChar = S.experience ? S.experience[0] : '-';
+  var oChar   = S.outcome === 'Yes' ? 'Y' : (S.outcome === 'No' ? 'N' : '-');
+  var p = { n:S.name, e:S.email, an:S.assessorName, d:S.date, x:expChar, p:pStr, r:rStr, o:oChar };
+  try {
+    var b64  = btoa(unescape(encodeURIComponent(JSON.stringify(p))));
+    var base = window.location.href.split('?')[0].split('#')[0];
+    return base + '?s=' + b64;
+  } catch(e) { return null; }
+}
+
+function decodeFromURL() {
+  var q = new URLSearchParams(window.location.search).get('s');
+  if (!q) return false;
+  try {
+    var p = JSON.parse(decodeURIComponent(escape(atob(q))));
+    S.name         = p.n  || '';
+    S.email        = p.e  || '';
+    S.assessorName = p.an || '';
+    S.date         = p.d  || S.date;
+    S.assessorSig  = null;
+    // Experience: single char n/i/e
+    var xMap = { n:'novice', i:'intermediate', e:'experienced' };
+    S.experience = xMap[p.x] || '';
+    // Prereqs: 4-char string
+    S.prereqs = {};
+    var pStr = p.p || '';
+    PREREQS.forEach(function(pr, i){ S.prereqs[pr] = pStr[i] === '1'; });
+    // Ratings: 26-char string in section/item order
+    S.ratings = {};
+    var rStr = p.r || '';
+    var idx  = 0;
+    SECTIONS.forEach(function(sec) {
+      sec.items.forEach(function(item) {
+        var ch = rStr[idx] || '-';
+        if (ch === 'C' || ch === 'D' || ch === 'S') {
+          S.ratings[sec.title+'::'+item] = ch;
+        }
+        idx++;
+      });
+    });
+    // Outcome
+    S.outcome = p.o === 'Y' ? 'Yes' : (p.o === 'N' ? 'No' : null);
+    S.mode = 'assessee';
+    S.step = 3;
+    return true;
+  } catch(e) { return false; }
+}
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+function ratedN() { return Object.values(S.ratings).filter(Boolean).length; }
+function pct()    { return Math.round(ratedN() / TOTAL * 100); }
+function allRated(){ return ratedN() === TOTAL; }
+function expLabel(){
+  var e = EXP.find(function(x){ return x.v === S.experience; });
+  return e ? (e.l + (e.d ? ' (' + e.d + ')' : '')) : '—';
+}
+function fmtDate(d) {
+  if (!d) return '—';
+  var parts = d.split('-');
+  return parts[2] + '/' + parts[1] + '/' + parts[0];
+}
+function esc(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2200);
+}
+
+// ── Signature pad ──────────────────────────────────────────────────────────────
+function initSigPad(id, onDone) {
+  var canvas = document.getElementById(id + '-canvas');
+  var ph     = document.getElementById(id + '-ph');
+  var clrBtn = document.getElementById(id + '-clear');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var rect = canvas.getBoundingClientRect();
+  canvas.width  = rect.width  * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+  var drawing = false;
+
+  function getPos(e) {
+    var r = canvas.getBoundingClientRect();
+    var src = e.touches ? e.touches[0] : e;
+    return { x: src.clientX - r.left, y: src.clientY - r.top };
+  }
+  function startDraw(e) {
+    e.preventDefault();
+    drawing = true;
+    var p = getPos(e);
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+  }
+  function doDrawing(e) {
+    e.preventDefault();
+    if (!drawing) return;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#1e293b';
+    var p = getPos(e);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+    if (ph) ph.style.display = 'none';
+    if (clrBtn) clrBtn.style.display = 'block';
+  }
+  function endDraw() {
+    if (!drawing) return;
+    drawing = false;
+    if (onDone) onDone(canvas.toDataURL());
+  }
+
+  canvas.addEventListener('mousedown',  startDraw);
+  canvas.addEventListener('mousemove',  doDrawing);
+  canvas.addEventListener('mouseup',    endDraw);
+  canvas.addEventListener('mouseleave', endDraw);
+  canvas.addEventListener('touchstart', startDraw, {passive:false});
+  canvas.addEventListener('touchmove',  doDrawing, {passive:false});
+  canvas.addEventListener('touchend',   endDraw);
+
+  if (clrBtn) {
+    clrBtn.addEventListener('click', function() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (ph) ph.style.display = 'block';
+      clrBtn.style.display = 'none';
+      if (onDone) onDone(null);
+    });
+  }
+
+  // Restore existing sig
+  var existing = (id === 'assessor') ? S.assessorSig : S.assesseeSig;
+  if (existing) {
+    var img = new Image();
+    img.onload = function() {
+      var r = canvas.getBoundingClientRect();
+      ctx.drawImage(img, 0, 0, r.width, r.height);
+      if (ph) ph.style.display = 'none';
+      if (clrBtn) clrBtn.style.display = 'block';
+    };
+    img.src = existing;
+  }
+}
+
+// ── PDF ────────────────────────────────────────────────────────────────────────
+function generatePDF() {
+  var rendered = {};
+  var spans = {};
+  SECTIONS.forEach(function(s){ spans[s.title] = s.items.length; });
+  var rows = '';
+  SECTIONS.forEach(function(sec) {
+    sec.items.forEach(function(item) {
+      var key = sec.title + '::' + item;
+      var r   = S.ratings[key] || '';
+      var rc  = RCOLS[r] || '#94a3b8';
+      var rl  = RLBLS[r] || 'Not rated';
+      var rCell = r
+        ? '<span style="background:' + rc + ';color:#fff;padding:2px 8px;border-radius:4px;font-weight:700;font-size:11px;">' + r + ' – ' + rl + '</span>'
+        : '<span style="color:#94a3b8;font-size:11px;">—</span>';
+      var sc = '';
+      if (!rendered[sec.title]) {
+        rendered[sec.title] = true;
+        sc = '<td rowspan="' + spans[sec.title] + '" style="background:#f1f5f9;font-weight:700;font-size:11px;padding:8px 10px;border:1px solid #e2e8f0;vertical-align:middle;width:24%;">' + sec.title + '</td>';
+      }
+      rows += '<tr>' + sc + '<td style="padding:7px 10px;border:1px solid #e2e8f0;font-size:11px;line-height:1.4;">' + item + '</td><td style="padding:7px 10px;border:1px solid #e2e8f0;text-align:center;">' + rCell + '</td></tr>';
+    });
+  });
+
+  var preRows = PREREQS.map(function(p) {
+    var ok = S.prereqs[p];
+    return '<tr><td style="padding:5px 10px;border:1px solid #e2e8f0;font-size:11px;">' + p + '</td><td style="padding:5px 10px;border:1px solid #e2e8f0;text-align:center;color:' + (ok ? '#16a34a' : '#dc2626') + ';font-weight:700;">' + (ok ? '✓' : '✗') + '</td></tr>';
+  }).join('');
+
+  var oc = S.outcome === 'Yes' ? '#16a34a' : (S.outcome === 'No' ? '#dc2626' : '#94a3b8');
+  var ob = S.outcome === 'Yes' ? '#f0fdf4' : (S.outcome === 'No' ? '#fef2f2' : '#f8fafc');
+
+  function sigBlock(lbl, sig, name) {
+    return '<div style="display:inline-block;width:46%;vertical-align:top;margin-right:4%;">'
+      + '<div style="font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">' + lbl + '</div>'
+      + '<div style="font-weight:700;font-size:12px;margin-bottom:6px;">' + (name||'—') + '</div>'
+      + (sig ? '<img src="' + sig + '" style="width:200px;height:55px;border:1px solid #e2e8f0;border-radius:4px;display:block;background:#fff;object-fit:contain;"/>'
+             : '<div style="width:200px;height:55px;border:1px dashed #cbd5e1;border-radius:4px;background:#f8fafc;"></div>')
+      + '<div style="font-size:10px;color:#64748b;margin-top:4px;">Date: ' + fmtDate(S.date) + '</div>'
+      + '</div>';
+  }
+
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"/>'
+    + '<title>PIVC Competency – ' + (S.name||'Unnamed') + ' – ' + fmtDate(S.date) + '</title>'
+    + '<style>@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}@page{margin:15mm;}}'
+    + '*{box-sizing:border-box;}body{font-family:Georgia,serif;color:#1e293b;margin:0;padding:0;}'
+    + '.page{max-width:800px;margin:0 auto;padding:28px 32px;}table{width:100%;border-collapse:collapse;margin-bottom:14px;}'
+    + 'h2{font-size:13px;font-weight:700;margin:16px 0 6px;border-bottom:2px solid #e2e8f0;padding-bottom:4px;}'
+    + '</style></head><body><div class="page">'
+    + '<div style="background:#0f172a;color:#fff;padding:16px 20px;border-radius:8px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:flex-end;">'
+    + '<div><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:.5;margin-bottom:4px;">Royal Brisbane &amp; Women\'s Hospital</div>'
+    + '<div style="font-size:17px;font-weight:700;margin-bottom:2px;">AHP – PIVC Competency Assessment</div>'
+    + '<div style="font-size:10px;opacity:.45;">Direct Observation of Practice · 2019</div></div>'
+    + '<div style="font-size:9px;opacity:.45;text-align:right;">Printed: ' + new Date().toLocaleDateString('en-AU') + '</div></div>'
+    + '<h2>Candidate Details</h2>'
+    + '<table><tr>'
+    + '<td style="padding:5px 9px;border:1px solid #e2e8f0;background:#f8fafc;font-weight:700;font-size:10px;width:22%;">Candidate</td>'
+    + '<td style="padding:5px 9px;border:1px solid #e2e8f0;font-size:11px;">' + (S.name||'—') + '</td>'
+    + '<td style="padding:5px 9px;border:1px solid #e2e8f0;background:#f8fafc;font-weight:700;font-size:10px;width:20%;">Date</td>'
+    + '<td style="padding:5px 9px;border:1px solid #e2e8f0;font-size:11px;">' + fmtDate(S.date) + '</td>'
+    + '</tr><tr>'
+    + '<td style="padding:5px 9px;border:1px solid #e2e8f0;background:#f8fafc;font-weight:700;font-size:10px;">Assessor</td>'
+    + '<td style="padding:5px 9px;border:1px solid #e2e8f0;font-size:11px;">' + (S.assessorName||'—') + '</td>'
+    + '<td style="padding:5px 9px;border:1px solid #e2e8f0;background:#f8fafc;font-weight:700;font-size:10px;">Experience</td>'
+    + '<td style="padding:5px 9px;border:1px solid #e2e8f0;font-size:11px;">' + expLabel() + '</td>'
+    + '</tr><tr>'
+    + '<td style="padding:5px 9px;border:1px solid #e2e8f0;background:#f8fafc;font-weight:700;font-size:10px;">Candidate Email</td>'
+    + '<td colspan="3" style="padding:5px 9px;border:1px solid #e2e8f0;font-size:11px;">' + (S.email||'—') + '</td>'
+    + '</tr></table>'
+    + '<h2>Prerequisite Reading</h2><table>' + preRows + '</table>'
+    + '<h2>Competency Assessment</h2>'
+    + '<table><thead><tr style="background:#0f172a;color:#fff;">'
+    + '<th style="padding:7px 10px;text-align:left;font-size:10px;border:1px solid #334155;">Section</th>'
+    + '<th style="padding:7px 10px;text-align:left;font-size:10px;border:1px solid #334155;">Criterion</th>'
+    + '<th style="padding:7px 10px;text-align:center;font-size:10px;border:1px solid #334155;width:22%;">Rating</th>'
+    + '</tr></thead><tbody>' + rows + '</tbody></table>'
+    + '<h2>Outcome</h2>'
+    + '<div style="padding:10px 16px;border:2px solid ' + oc + ';border-radius:7px;background:' + ob + ';margin-bottom:16px;">'
+    + '<span style="font-weight:700;font-size:14px;color:' + oc + ';">Competency Achieved: ' + (S.outcome||'—') + '</span></div>'
+    + '<h2>Declaration &amp; Signatures</h2>'
+    + '<p style="font-size:10px;color:#64748b;line-height:1.6;margin-bottom:14px;">Having successfully completed this assessment I will continue this practice in a way that meets policy, procedure and safety requirements. I also accept responsibility for maintenance of these skills and will seek renewal of the competency if my practice lapses for more than 3 months.</p>'
+    + '<div>' + sigBlock('Assessor', S.assessorSig, S.assessorName) + sigBlock('Candidate', S.assesseeSig, S.name) + '</div>'
+    + '<div style="margin-top:24px;padding-top:10px;border-top:1px solid #e2e8f0;">'
+    + '<p style="font-size:9px;color:#94a3b8;line-height:1.6;"><strong>C = Competent</strong> – Completes procedure efficiently without cues. <strong>D = Requires Development</strong> – Completed but required prompting or extra time. <strong>S = Requires Supervision</strong> – Unable to complete without facilitator intervention.</p>'
+    + '<p style="font-size:9px;color:#94a3b8;margin-top:6px;">Return completed form to Dan Clarke – a copy will be retained and forwarded to candidate email.</p>'
+    + '</div></div></body></html>';
+
+  var w = window.open('', '_blank');
+  if (w) { w.document.write(html); w.document.close(); w.focus(); setTimeout(function(){ w.print(); }, 600); }
+}
+
+// ── Email ──────────────────────────────────────────────────────────────────────
+function sendEmail() {
+  var subj = encodeURIComponent('AHP PIVC Competency – ' + S.name + ' – ' + fmtDate(S.date));
+  var body = encodeURIComponent(
+    'Hi Dan,\n\nPlease find attached the completed AHP PIVC Competency Assessment.\n\n'
+    + 'Candidate:  ' + S.name + '\n'
+    + 'Assessor:   ' + S.assessorName + '\n'
+    + 'Date:       ' + fmtDate(S.date) + '\n'
+    + 'Outcome:    Competency Achieved – ' + (S.outcome||'Not recorded') + '\n'
+    + 'Experience: ' + expLabel() + '\n\n'
+    + 'Please attach the PDF saved from the print dialog.\n\nRegards'
+  );
+  var to = [DAN, S.email].filter(Boolean).join(',');
+  window.location.href = 'mailto:' + to + '?subject=' + subj + '&body=' + body;
+}
+
+// ── Share helpers ──────────────────────────────────────────────────────────────
+function copyLink() {
+  var url = encodeToURL();
+  if (!url) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(function(){ showToast('Link copied!'); });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = url;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Link copied!');
+  }
+}
+function emailLink() {
+  var url  = encodeToURL();
+  if (!url) return;
+  var subj = encodeURIComponent('Please sign your PIVC Competency Assessment');
+  var body = encodeURIComponent(
+    'Hi ' + (S.name||'') + ',\n\n'
+    + 'Your PIVC Competency Assessment has been completed by ' + (S.assessorName||'your assessor') + ' on ' + fmtDate(S.date) + '.\n\n'
+    + 'Please open the link below to review the results and countersign:\n\n'
+    + url + '\n\n'
+    + 'No login required – everything is in the link.\n\nRegards'
+  );
+  window.location.href = 'mailto:' + (S.email||'') + '?subject=' + subj + '&body=' + body;
+}
+function smsLink() {
+  var url = encodeToURL();
+  if (!url) return;
+  window.location.href = 'sms:?body=' + encodeURIComponent('Please sign your PIVC Competency Assessment: ' + url);
+}
+function submitForm() {
+  if (!SCRIPT_URL || SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+    showToast('Script URL not configured');
+    return;
+  }
+  // Show loading state
+  var btn = document.getElementById('submit-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Submitting…'; }
+
+  // Build payload — include both signatures as base64 PNGs
+  var payload = {
+    name:         S.name,
+    email:        S.email,
+    assessorName: S.assessorName,
+    date:         S.date,
+    experience:   expLabel(),
+    outcome:      S.outcome,
+    prereqs:      PREREQS.map(function(p){ return { label: p, checked: !!S.prereqs[p] }; }),
+    sections:     SECTIONS.map(function(sec){
+      return {
+        title: sec.title,
+        items: sec.items.map(function(item){
+          return { text: item, rating: S.ratings[sec.title+'::'+item] || '' };
+        })
+      };
+    }),
+    assessorSig:  S.assessorSig  || '',
+    assesseeSig:  S.assesseeSig  || '',
+    dan:          DAN
+  };
+
+  // Use text/plain content-type to avoid CORS preflight with Apps Script
+  fetch(SCRIPT_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body:    JSON.stringify(payload)
+  })
+  .then(function(res){ return res.json(); })
+  .then(function(data) {
+    if (data.status === 'ok') {
+      S.step = 99; // success screen
+      render();
+    } else {
+      throw new Error(data.message || 'Unknown error');
+    }
+  })
+  .catch(function(err) {
+    console.error(err);
+    if (btn) { btn.disabled = false; btn.textContent = 'Submit — try again'; }
+    showToast('Submission failed — check connection');
+  });
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────────
+function render() {
+  var root   = document.getElementById('root');
+  var rated  = ratedN();
+  var p      = pct();
+  var isDone = (p === 100);
+
+  var tabs = '';
+  if (S.mode === 'assessor') {
+    ['Details','Assessment','Sign'].forEach(function(label, i) {
+      tabs += '<button class="tab' + (S.step === i ? ' active' : '') + '" data-action="gostep" data-step="' + i + '">' + label + '</button>';
+    });
+  } else {
+    tabs = '<button class="tab active">Review &amp; Sign</button>';
+  }
+
+  var content = '';
+
+  // ── Step 0: Details ──────────────────────────────────────────────────────
+  if (S.step === 0) {
+    var expBtns = EXP.map(function(e) {
+      return '<button class="exp-btn' + (S.experience === e.v ? ' sel' : '') + '" data-action="setexp" data-val="' + e.v + '">'
+        + '<span class="exp-lbl">' + e.l + '</span>'
+        + (e.d ? '<span class="exp-desc">' + e.d + '</span>' : '')
+        + '</button>';
+    }).join('');
+
+    var preItems = PREREQS.map(function(pr, i) {
+      return '<label class="pre-item' + (S.prereqs[pr] ? ' chk' : '') + '">'
+        + '<input type="checkbox" data-action="setpre" data-idx="' + i + '"' + (S.prereqs[pr] ? ' checked' : '') + '/>'
+        + '<span>' + pr + '</span></label>';
+    }).join('');
+
+    content = '<div class="card">'
+      + '<div class="card-title">Candidate &amp; Assessor Details</div>'
+      + '<div class="fg2">'
+      + '<div class="f"><label>Candidate Name</label><input type="text" id="inp-name" value="' + esc(S.name) + '" placeholder="Full name"/></div>'
+      + '<div class="f"><label>Candidate Email</label>'
+      + '<div style="display:flex;align-items:center;border:1.5px solid #e2e8f0;border-radius:7px;overflow:hidden;background:#fff;">'
+      + '<input type="text" id="inp-email-user" value="' + esc(S.email.replace('@health.qld.gov.au','')) + '" placeholder="username" style="border:none;outline:none;padding:9px 0 9px 11px;font-size:14px;font-family:var(--font);color:#0f172a;flex:1;min-width:0;background:transparent;"/>'
+      + '<span style="padding:9px 10px 9px 2px;font-size:13px;color:#64748b;white-space:nowrap;background:transparent;">@health.qld.gov.au</span>'
+      + '</div></div>'
+      + '<div class="f"><label>Assessor Name</label><input type="text" id="inp-assessor" value="' + esc(S.assessorName) + '" placeholder="Full name"/></div>'
+      + '<div class="f"><label>Assessment Date</label><input type="date" id="inp-date" value="' + S.date + '"/></div>'
+      + '</div>'
+      + '<div class="card-title" style="margin-top:4px;">Experience Level</div>'
+      + '<div class="exp-g">' + expBtns + '</div>'
+      + '<div class="card-title">Prerequisite Reading</div>'
+      + preItems
+      + '</div>'
+      + '<button class="btn btn-dk" data-action="gostep" data-step="1">Continue to Assessment →</button>';
+  }
+
+  // ── Step 1: Assessment ───────────────────────────────────────────────────
+  else if (S.step === 1) {
+    var criteriaBox = '<div class="card" style="margin-bottom:14px;">'
+      + '<div class="card-title">Assessment Criteria</div>'
+      + '<div style="display:flex;flex-direction:column;gap:8px;">'
+      + '<div style="display:flex;gap:10px;align-items:flex-start;">'
+      + '<span class="rat-btn sC" style="cursor:default;flex-shrink:0;">C</span>'
+      + '<span style="font-size:13px;color:#334155;line-height:1.5;"><strong>Competent</strong> — Completes procedure efficiently and without cues from the facilitator. Assessor advises that the learner is able to complete the procedure without supervision.</span>'
+      + '</div>'
+      + '<div style="display:flex;gap:10px;align-items:flex-start;">'
+      + '<span class="rat-btn sD" style="cursor:default;flex-shrink:0;">D</span>'
+      + '<span style="font-size:13px;color:#334155;line-height:1.5;"><strong>Requires Development</strong> — Can complete procedure, however required direction, prompting or more time than expected, or was unable to explain rationale for actions. Assessor advises learner to undertake further training and to perform this procedure under indirect supervision.</span>'
+      + '</div>'
+      + '<div style="display:flex;gap:10px;align-items:flex-start;">'
+      + '<span class="rat-btn sS" style="cursor:default;flex-shrink:0;">S</span>'
+      + '<span style="font-size:13px;color:#334155;line-height:1.5;"><strong>Requires Supervision</strong> — Unable to complete procedure without intervention of facilitator. Cannot perform tasks and/or link rationale to actions. Assessor advises learner to undertake further training and to perform this procedure only under direct supervision.</span>'
+      + '</div>'
+      + '</div></div>';
+
+    var sections = SECTIONS.map(function(sec, si) {
+      var allC = sec.items.every(function(item){ return S.ratings[sec.title+'::'+item] === 'C'; });
+      var items = sec.items.map(function(item) {
+        var key = sec.title + '::' + item;
+        var cur = S.ratings[key] || '';
+        var btns = ['C','D','S'].map(function(r) {
+          return '<button class="rat-btn' + (cur === r ? ' s' + r : '') + '" data-action="setrating" data-key="' + esc(key) + '" data-r="' + r + '" title="' + RLBLS[r] + '">' + r + '</button>';
+        }).join('');
+        return '<div class="crit-row"><span class="crit-text">' + item + '</span><div class="rat-g">' + btns + '</div></div>';
+      }).join('');
+      var bStyle = allC
+        ? 'border:1.5px solid #16a34a;background:#f0fdf4;color:#16a34a;'
+        : 'border:1.5px solid #e2e8f0;background:#f8fafc;color:#64748b;';
+      var allCBtn = '<button data-action="setsectionC" data-si="' + si + '" style="' + bStyle + 'border-radius:6px;padding:3px 10px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--mono);white-space:nowrap;">' + 'All Competent' + '</button>';
+      var titleRow = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;border-bottom:1.5px solid #e2e8f0;padding-bottom:8px;">'
+        + '<span style="font-size:14px;font-weight:700;color:#0f172a;">' + sec.title + '</span>'
+        + allCBtn + '</div>';
+      return '<div class="card">' + titleRow + items + '</div>';
+    }).join('');
+
+    var remaining = TOTAL - rated;
+    var canContinue = allRated() && S.outcome;
+    content = criteriaBox + sections
+      + '<div class="card"><div class="card-title">Overall Outcome</div>'
+      + '<div class="out-g">'
+      + '<button class="out-btn' + (S.outcome === 'Yes' ? ' sY' : '') + '" data-action="setoutcome" data-val="Yes">✓ Competency Achieved</button>'
+      + '<button class="out-btn' + (S.outcome === 'No' ? ' sN' : '') + '" data-action="setoutcome" data-val="No">✗ Not Achieved</button>'
+      + '</div></div>'
+      + '<div class="btn-row">'
+      + '<button class="btn btn-sec" data-action="gostep" data-step="0" style="flex:1">← Back</button>'
+      + '<button class="btn btn-dk" data-action="gostep" data-step="2" style="flex:2"' + (canContinue ? '' : ' disabled') + '>'
+      + (allRated() ? (S.outcome ? 'Continue to Sign →' : 'Select outcome to continue') : ('Rate all criteria (' + remaining + ' remaining)'))
+      + '</button></div>';
+  }
+
+  // ── Step 2: Assessor sign ────────────────────────────────────────────────
+  else if (S.step === 2) {
+    var url = encodeToURL() || '';
+    content = '<div class="card">'
+      + '<div class="card-title">Assessor Signature</div>'
+      + '<p class="note">Sign below to confirm this assessment. A shareable link will then appear to send to the candidate for countersignature.</p>'
+      + '<span class="sig-label">Assessor: ' + esc(S.assessorName||'(name not entered)') + '</span>'
+      + '<div class="sig-wrap"><canvas class="sig-canvas" id="assessor-canvas"></canvas>'
+      + '<span class="sig-ph" id="assessor-ph">Draw signature here</span>'
+      + '<button class="sig-clear" id="assessor-clear">Clear</button></div>'
+      + '</div>'
+      + (S.assessorSig ? (
+          '<div class="share-box">'
+          + '<h3>✓ Signed — Send Link to Candidate</h3>'
+          + '<p>Share this link with <strong>' + esc(S.name||'the candidate') + '</strong>. They can open it on any device, review the assessment, and countersign. No login required.</p>'
+          + '<div class="share-url">' + esc(url) + '</div>'
+          + '<div class="share-acts">'
+          + '<button class="share-act-btn btn-grn" data-action="copylink">Copy Link</button>'
+          + '<button class="share-act-btn btn-blu" data-action="emaillink">Email Candidate</button>'
+          + '<button class="share-act-btn btn-amb" data-action="smslink">Send SMS</button>'
+          + '</div></div>'
+        ) : '')
+      + '<div class="btn-row"><button class="btn btn-sec" data-action="gostep" data-step="1">← Back</button></div>';
+  }
+
+  // ── Step 3: Assessee review + sign ───────────────────────────────────────
+  else if (S.step === 3) {
+    var reviewSecs = SECTIONS.map(function(sec) {
+      var rows = sec.items.map(function(item) {
+        var key = sec.title + '::' + item;
+        var r   = S.ratings[key];
+        return '<div class="rev-row"><span class="rev-text">' + item + '</span>'
+          + (r ? '<span class="chip chip-' + r + '">' + r + '</span>' : '<span class="chip chip-na">—</span>')
+          + '</div>';
+      }).join('');
+      return '<div class="rev-section"><div class="rev-sec-title">' + sec.title + '</div>' + rows + '</div>';
+    }).join('');
+
+    content = '<div class="assessee-banner">'
+      + '<h2>Assessment Ready for Your Signature</h2>'
+      + '<p>Completed by <strong>' + esc(S.assessorName||'your assessor') + '</strong> on ' + fmtDate(S.date) + '. Please review the results and sign to confirm.</p>'
+      + '</div>'
+      + '<div class="card"><div class="card-title">Assessment Summary</div>'
+      + '<div style="margin-bottom:14px;font-size:13px;color:#475569;">Candidate: <strong>' + esc(S.name) + '</strong> &nbsp;·&nbsp; Experience: <strong>' + expLabel() + '</strong></div>'
+      + reviewSecs + '</div>'
+      + '<div class="card"><div class="card-title">Outcome</div>'
+      + '<div class="outcome-badge ' + (S.outcome === 'Yes' ? 'Y' : 'N') + '">Competency Achieved: ' + (S.outcome||'—') + '</div></div>'
+      + '<div class="card"><div class="card-title">Your Signature</div>'
+      + '<p class="note">Having successfully completed this assessment I am able to perform intravenous cannulation under the nearby supervision of the Anaesthetist. I will continue my practice in a way that meets policy, procedure and safety requirements. I also accept responsibility for maintenance of these skills and will seek renewal of the competency if my practice lapses for more than 3 months.</p>'
+      + '<span class="sig-label">Candidate: ' + esc(S.name||'(name not entered)') + '</span>'
+      + '<div class="sig-wrap"><canvas class="sig-canvas" id="assessee-canvas"></canvas>'
+      + '<span class="sig-ph" id="assessee-ph">Draw signature here</span>'
+      + '<button class="sig-clear" id="assessee-clear">Clear</button></div>'
+      + '<div class="f" style="margin-top:8px;"><label>Your Email (to receive a copy)</label>'
+      + '<div style="display:flex;align-items:center;border:1.5px solid #e2e8f0;border-radius:7px;overflow:hidden;background:#fff;">'
+      + '<input type="text" id="inp-email-assessee-user" value="' + esc(S.email.replace('@health.qld.gov.au','')) + '" placeholder="username" style="border:none;outline:none;padding:9px 0 9px 11px;font-size:14px;font-family:var(--font);color:#0f172a;flex:1;min-width:0;background:transparent;"/>'
+      + '<span style="padding:9px 10px 9px 2px;font-size:13px;color:#64748b;white-space:nowrap;background:transparent;">@health.qld.gov.au</span>'
+      + '</div></div>'
+      + '</div>'
+      + '<button class="btn btn-grn" id="submit-btn" data-action="submit"' + (S.assesseeSig ? '' : ' disabled') + '>'
+      + (S.assesseeSig ? 'Submit &amp; Send PDF →' : 'Sign above to submit')
+      + '</button>';
+  }
+
+  // ── Step 99: Success ─────────────────────────────────────────────────────
+  else if (S.step === 99) {
+    content = '<div class="card" style="text-align:center;padding:40px 24px;">'
+      + '<div style="font-size:48px;margin-bottom:16px;">✓</div>'
+      + '<div style="font-size:20px;font-weight:700;color:#16a34a;margin-bottom:10px;">Submitted Successfully</div>'
+      + '<div style="font-size:14px;color:#475569;line-height:1.6;margin-bottom:6px;">The completed assessment has been saved to Google Drive and emailed to:</div>'
+      + '<div style="font-size:13px;color:#1e293b;font-weight:700;margin-bottom:4px;">' + esc(DAN) + '</div>'
+      + (S.email ? '<div style="font-size:13px;color:#1e293b;font-weight:700;">' + esc(S.email) + '</div>' : '')
+      + '</div>';
+  }
+
+  // ── Assemble full page ───────────────────────────────────────────────────
+  root.innerHTML = '<div class="hdr">'
+    + '<div class="hdr-eye">RBWH · Anaesthetic Health Practitioner</div>'
+    + '<div class="hdr-title">PIVC Competency Assessment</div>'
+    + '<div class="hdr-sub">Direct Observation of Practice</div>'
+    + (S.mode === 'assessor' ? (
+        '<div class="prog"><div class="prog-meta"><span>Assessment progress</span>'
+        + '<span style="color:' + (isDone ? '#4ade80' : '#4a6fa5') + ';font-weight:700;">' + rated + '/' + TOTAL + ' · ' + p + '%</span></div>'
+        + '<div class="prog-track"><div class="prog-fill' + (isDone ? ' done' : '') + '" style="width:' + p + '%"></div></div></div>'
+      ) : '')
+    + '<div class="tabs">' + tabs + '</div>'
+    + '</div>'
+    + content;
+
+  // Attach live input listeners
+  function liveInput(id, key) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('input', function(){ S[key] = this.value; });
+  }
+  function liveEmail(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('input', function(){
+      var u = this.value.replace(/@.*$/,'').trim();
+      S.email = u ? u + '@health.qld.gov.au' : '';
+    });
+  }
+  liveInput('inp-name',     'name');
+  liveInput('inp-assessor', 'assessorName');
+  liveInput('inp-date',     'date');
+  liveEmail('inp-email-user');
+  liveEmail('inp-email-assessee-user');
+
+  // Init sig pads after render
+  if (S.step === 2) {
+    setTimeout(function(){
+      initSigPad('assessor', function(sig){ S.assessorSig = sig; render(); });
+    }, 50);
+  }
+  if (S.step === 3) {
+    setTimeout(function(){
+      initSigPad('assessee', function(sig){ S.assesseeSig = sig; render(); });
+    }, 50);
+  }
+}
+
+// ── Event delegation (no inline onclick) ──────────────────────────────────────
+document.addEventListener('click', function(e) {
+  var el = e.target.closest('[data-action]');
+  if (!el) return;
+  var action = el.getAttribute('data-action');
+
+  if (action === 'gostep') {
+    // Save any current inputs before navigating
+    var n = document.getElementById('inp-name');       if (n) S.name = n.value;
+    var eu= document.getElementById('inp-email-user'); if (eu) { var u=eu.value.replace(/@.*$/,'').trim(); S.email = u ? u+'@health.qld.gov.au' : ''; }
+    var a = document.getElementById('inp-assessor');   if (a) S.assessorName = a.value;
+    var d = document.getElementById('inp-date');       if (d) S.date = d.value;
+    var step = parseInt(el.getAttribute('data-step'), 10);
+    S.step = step;
+    render();
+    window.scrollTo(0, 0);
+  }
+  else if (action === 'setexp') {
+    S.experience = el.getAttribute('data-val');
+    render();
+  }
+  else if (action === 'setpre') {
+    var idx = parseInt(el.getAttribute('data-idx'), 10);
+    S.prereqs[PREREQS[idx]] = e.target.checked;
+    // Update label class without full re-render
+    var lbl = e.target.closest('.pre-item');
+    if (lbl) lbl.classList.toggle('chk', e.target.checked);
+  }
+  else if (action === 'setrating') {
+    var key = el.getAttribute('data-key');
+    var r   = el.getAttribute('data-r');
+    S.ratings[key] = (S.ratings[key] === r) ? '' : r;
+    render();
+  }
+  else if (action === 'setsectionC') {
+    var si  = parseInt(el.getAttribute('data-si'), 10);
+    var sec = SECTIONS[si];
+    var allC = sec.items.every(function(item){ return S.ratings[sec.title+'::'+item] === 'C'; });
+    sec.items.forEach(function(item) {
+      S.ratings[sec.title+'::'+item] = allC ? '' : 'C';
+    });
+    render();
+  }
+  else if (action === 'setoutcome') {
+    var val = el.getAttribute('data-val');
+    S.outcome = (S.outcome === val) ? null : val;
+    render();
+  }
+  else if (action === 'copylink')  { copyLink(); }
+  else if (action === 'emaillink') { emailLink(); }
+  else if (action === 'smslink')   { smsLink(); }
+  else if (action === 'submit')    { submitForm(); }
+});
+
+// ── Boot ───────────────────────────────────────────────────────────────────────
+decodeFromURL();
+render();
+</script>
+
+
+</body></html>
